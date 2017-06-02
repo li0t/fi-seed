@@ -18,6 +18,6 @@ module.exports = {
   },
 
   /* Server ports */
-  port: 3080
+  port: 9999
 
 }

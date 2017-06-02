@@ -4,7 +4,7 @@ const debug = require('debug')('app:database')
 const mongoose = require('mongoose')
 
 /* This will use the 'name' property in your package.json as the database name */
-const DB = require(__basedir + '/package.json').name
+const DB = require(__basedir + '/package.json').name.replace(/[.]/g, '-')
 const SERVER = 'localhost'
 
 const uri = `mongodb://${SERVER}/${DB}`

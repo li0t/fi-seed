@@ -4,6 +4,12 @@
   var ng = window.angular
 
   /* Pages Home route definition */
+  var pagesIndexRouteDef = {
+    templateUrl: '/assets/templates/pages/index.html',
+    controller: 'Pages:Index'
+  }
+
+  /* Pages Home route definition */
   var pagesHomeRouteDef = {
     templateUrl: '/assets/templates/pages/home.html',
     controller: 'Pages:Home'
@@ -42,7 +48,7 @@
    * Pages routes configuration.
    */
   function pagesRoutesConfigFn ($routeProvider) {
-    $routeProvider.when('/', pagesHomeRouteDef)
+    $routeProvider.when('/', pagesIndexRouteDef)
       .when('/forbidden', pagesForbiddenRouteDef)
       .when('/error', pagesErrorRouteDef)
       .when('/theme', pagesThemeRouteDef)
