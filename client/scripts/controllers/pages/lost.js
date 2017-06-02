@@ -1,13 +1,13 @@
 (function (window) {
-  'use strict';
+  'use strict'
 
-  var ng = window.angular;
+  var ng = window.angular
 
   /**
    * Pages Lost Controller.
    */
-  function PagesLostController($scope, $location) {
-    $scope.url = $location.search().url;
+  function PagesLostController ($scope, $location) {
+    $scope.url = $location.search().url
   }
 
   /* Define AngularJS controller */
@@ -15,6 +15,5 @@
     '$scope', '$location',
 
     PagesLostController
-  ]);
-
-}(window));
+  ])
+}(window))

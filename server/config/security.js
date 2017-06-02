@@ -1,6 +1,6 @@
-'use strict';
+'use strict'
 
-const SELF = '\'self\'';
+const SELF = '\'self\''
 
 module.exports = {
 
@@ -16,7 +16,7 @@ module.exports = {
 
   csp: {
     policy: {
-      'img-src': `${ SELF } loremflickr.com`,
+      'img-src': `${SELF} loremflickr.com`,
       'default-src': SELF
     }
   },
@@ -26,4 +26,4 @@ module.exports = {
     maxAge: 31536000
   }
 
-};
+}

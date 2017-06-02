@@ -1,13 +1,13 @@
 (function (window) {
-  'use strict';
+  'use strict'
 
-  var ng = window.angular;
+  var ng = window.angular
 
   /**
    * Pages Forbidden Controller.
    */
-  function PagesForbiddenController($scope, $location) {
-    $scope.err = $location.search().err;
+  function PagesForbiddenController ($scope, $location) {
+    $scope.err = $location.search().err
   }
 
   /* Define AngularJS controller */
@@ -15,6 +15,5 @@
     '$scope', '$location',
 
     PagesForbiddenController
-  ]);
-
-}(window));
+  ])
+}(window))

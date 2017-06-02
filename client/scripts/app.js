@@ -1,11 +1,11 @@
 (function (window) {
-  'use strict';
+  'use strict'
 
-  var ng = window.angular;
+  var ng = window.angular
 
-  function getMetaContent(name) {
+  function getMetaContent (name) {
     return document.querySelector('meta[name="' + name + '"]')
-      .getAttribute('content');
+      .getAttribute('content')
   }
 
   /* Application info */
@@ -15,7 +15,7 @@
     stage: getMetaContent('stage'),
     title: getMetaContent('title'),
     name: getMetaContent('name')
-  };
+  }
 
   var APP_DEF = [
     /** Angular dependencies **/
@@ -27,8 +27,7 @@
     'pascalprecht.translate', // Angular translate (great module naming btw ¬¬)
     'ngSession',
     'ngFlashes'
-  ];
+  ]
 
-  ng.module('App', APP_DEF);
-
-}(window));
+  ng.module('App', APP_DEF)
+}(window))

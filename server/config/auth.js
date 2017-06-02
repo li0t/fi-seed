@@ -1,13 +1,13 @@
-'use strict';
+'use strict'
 
-const CONSTS = require('fi-consts');
-const debug = require('debug');
+const CONSTS = require('fi-consts')
+const debug = require('debug')
 
-const HTTP_METHOD_GET = CONSTS.METHODS.HTTP.GET;
-const ROLE_ADMIN = CONSTS.ROLES.ADMIN;
-const ROLE_USER = CONSTS.ROLES.USER;
+const HTTP_METHOD_GET = CONSTS.METHODS.HTTP.GET
+const ROLE_ADMIN = CONSTS.ROLES.ADMIN
+const ROLE_USER = CONSTS.ROLES.USER
 
-const ROUTE_API_USERS_SIGNOUT = '/api/users/sign-out';
+const ROUTE_API_USERS_SIGNOUT = '/api/users/sign-out'
 
 module.exports = {
 
@@ -15,10 +15,10 @@ module.exports = {
 
   authorizer: (req) => {
     if (req.session.user && req.session.user.roles) {
-      return req.session.user.roles;
+      return req.session.user.roles
     }
 
-    return null;
+    return null
   },
 
   routes: [{
@@ -29,4 +29,4 @@ module.exports = {
     ]
   }]
 
-};
+}

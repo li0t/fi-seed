@@ -1,7 +1,7 @@
-'use strict';
+'use strict'
 
-const debug = require('debug');
-const path = require('path');
+const debug = require('debug')
+const path = require('path')
 
 module.exports = {
 
@@ -9,4 +9,4 @@ module.exports = {
 
   debug: debug('app:consts')
 
-};
+}

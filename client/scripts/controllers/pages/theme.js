@@ -1,20 +1,19 @@
 (function (window) {
-  'use strict';
+  'use strict'
 
-  var ng = window.angular;
+  var ng = window.angular
 
   /**
    * Pages Theme Controller.
    */
-  function PagesThemeController($scope, $flash) {
-    $scope.$flash = $flash;
+  function PagesThemeController ($scope, $flash) {
+    $scope.$flash = $flash
   }
 
-  /*Define AngularJS controller */
+  /* Define AngularJS controller */
   ng.module('App').controller('Pages:Theme', [
     '$scope', 'ngFlashes',
 
     PagesThemeController
-  ]);
-
-}(window));
+  ])
+}(window))

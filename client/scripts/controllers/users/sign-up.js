@@ -1,65 +1,65 @@
 (function (window) {
-  'use strict';
+  'use strict'
 
-  var ng = window.angular;
+  var ng = window.angular
 
   /**
    * User Sign Up controller function.
    */
-  function UsersSignUpController($scope, $http, $location, $session, $flash, consts) {
+  function UsersSignUpController ($scope, $http, $location, $session, $flash, consts) {
     /**
      * Signing in is successful.
      */
-    function signInSuccess() {
-      $flash.success('USERS.SIGN_UP.FLASHES.SUCCESS.TITLE', 'USERS.SIGN_UP.FLASHES.SUCCESS.MESSAGE');
-      $location.path('/');
+    function signInSuccess () {
+      $flash.success('USERS.SIGN_UP.FLASHES.SUCCESS.TITLE', 'USERS.SIGN_UP.FLASHES.SUCCESS.MESSAGE')
+      $location.path('/')
     }
 
     /**
      * Signing in has failed.
      */
-    function signInError() {
-      $session.danger('USERS.SIGN_UP.FLASHES.ERROR.TITLE', 'USERS.SIGN_UP.FLASHES.ERROR.MESSAGE');
-      $scope.submitting = false;
+    function signInError () {
+      $session.danger('USERS.SIGN_UP.FLASHES.ERROR.TITLE', 'USERS.SIGN_UP.FLASHES.ERROR.MESSAGE')
+      $scope.submitting = false
     }
 
     /**
      * Submitting is successful.
      */
-    function submitSuccess() {
+    function submitSuccess () {
       return $session.signIn($scope.data)
-        .then(signInSuccess, signInError);
+        .then(signInSuccess, signInError)
     }
 
     /**
      * Submitting has failed.
      */
-    function submitFailed(res) {
+    function submitFailed (res) {
       if (res.status === 409) {
-        $flash.warning('USERS.SIGN_UP.FLASHES.DUPLICATED.TITLE', 'USERS.SIGN_UP.FLASHES.DUPLICATED.MESSAGE');
+        $flash.warning('USERS.SIGN_UP.FLASHES.DUPLICATED.TITLE', 'USERS.SIGN_UP.FLASHES.DUPLICATED.MESSAGE')
       } else if (res.status === 400) {
-        $flash.warning('USERS.SIGN_UP.FLASHES.WARNING.TITLE', 'USERS.SIGN_UP.FLASHES.WARNING.MESSAGE');
+        $flash.warning('USERS.SIGN_UP.FLASHES.WARNING.TITLE', 'USERS.SIGN_UP.FLASHES.WARNING.MESSAGE')
       } else {
-        $flash.danger('USERS.SIGN_UP.FLASHES.DANGER.TITLE', 'USERS.SIGN_UP.FLASHES.DANGER.MESSAGE');
+        $flash.danger('USERS.SIGN_UP.FLASHES.DANGER.TITLE', 'USERS.SIGN_UP.FLASHES.DANGER.MESSAGE')
       }
 
-      $scope.submitting = false;
+      $scope.submitting = false
     }
 
     /**
      * Submit the form and attempt a sign up.
      */
-    function submit() {
-      $scope.submitting = true;
+    function submit () {
+      $scope.submitting = true
 
       $http.post('/api/users', $scope.data)
-        .then(submitSuccess, submitFailed);
+        .then(submitSuccess, submitFailed)
     }
 
-    $scope.consts = consts.data;
-    $scope.submitting = false;
+    $scope.consts = consts.data
+    $scope.submitting = false
 
-    $scope.submit = submit;
+    $scope.submit = submit
   }
 
   /* Define AngularJS controller */
@@ -67,6 +67,5 @@
     '$scope', '$http', '$location', 'ngSession', 'ngFlashes', 'consts',
 
     UsersSignUpController
-  ]);
-
-}(window));
+  ])
+}(window))

@@ -1,13 +1,13 @@
 (function (window) {
-  'use strict';
+  'use strict'
 
-  var ng = window.angular;
+  var ng = window.angular
 
   /**
    * Pages Home Controller.
    */
-  function PagesHomeController($scope, $log) {
-    $log.log('The home controller has been initialized!');
+  function PagesHomeController ($scope, $log) {
+    $log.log('The home controller has been initialized!')
   }
 
   /* Define AngularJS controller */
@@ -15,6 +15,5 @@
     '$scope', '$log',
 
     PagesHomeController
-  ]);
-
-}(window));
+  ])
+}(window))

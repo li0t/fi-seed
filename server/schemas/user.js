@@ -1,27 +1,26 @@
-'use strict';
+'use strict'
 
-const CONSTS = require('fi-consts');
+const CONSTS = require('fi-consts')
 
-const bcrypt = require('bcrypt');
-const is = require('fi-is');
+const bcrypt = require('bcrypt')
+const is = require('fi-is')
 
 /* Genders */
-const GENDER_FEMALE = CONSTS.GENDERS.FEMALE;
-const GENDER_MALE = CONSTS.GENDERS.MALE;
+const GENDER_FEMALE = CONSTS.GENDERS.FEMALE
+const GENDER_MALE = CONSTS.GENDERS.MALE
 
 /* Roles */
-const ROLE_ADMIN = CONSTS.ROLES.ADMIN;
-const ROLE_USER = CONSTS.ROLES.USER;
+const ROLE_ADMIN = CONSTS.ROLES.ADMIN
+const ROLE_USER = CONSTS.ROLES.USER
 
 /* Password hashing rounds */
-const HASH_ROUNDS = 8;
+const HASH_ROUNDS = 8
 
-const PASSWORD = 'password';
-const EMAIL = 'email';
-const USER = 'user';
+const PASSWORD = 'password'
+const EMAIL = 'email'
+const USER = 'user'
 
 module.exports = (Schema) => {
-
   const schema = new Schema({
 
     name: {
@@ -62,39 +61,39 @@ module.exports = (Schema) => {
 
     timestamps: true
 
-  });
+  })
 
   /**
    * Hash user's password before saving.
    */
-  function preSavePassword(next) {
+  function preSavePassword (next) {
     if (!this.isModified(PASSWORD)) {
-      next();
+      next()
     }
 
     return bcrypt.hash(this.password, HASH_ROUNDS).then((hash) => {
-      this.password = hash;
-      next();
-    }).catch(next);
+      this.password = hash
+      next()
+    }).catch(next)
   }
 
   /**
    * Hash user's password before updating.
    */
-  function preUpdatePassword(next) {
-    var update = this._update;
+  function preUpdatePassword (next) {
+    var update = this._update
 
     if (!update.$set || !update.$set.password) {
-      return next();
+      return next()
     }
 
     return bcrypt.hash(update.$set.password, HASH_ROUNDS).then((hash) => {
       this.update({}, {
         password: hash
-      });
+      })
 
-      next();
-    }).catch(next);
+      next()
+    }).catch(next)
   }
 
   /**
@@ -104,17 +103,16 @@ module.exports = (Schema) => {
    *
    * @return {Promise}
    */
-  function findByEmail(email) {
+  function findByEmail (email) {
     return this.model(USER).findOne()
-      .where(EMAIL).equals(email);
+      .where(EMAIL).equals(email)
   }
 
-  schema.pre('findOneAndUpdate', preUpdatePassword);
-  schema.pre('update', preUpdatePassword);
-  schema.pre('save', preSavePassword);
+  schema.pre('findOneAndUpdate', preUpdatePassword)
+  schema.pre('update', preUpdatePassword)
+  schema.pre('save', preSavePassword)
 
-  schema.static('findByEmail', findByEmail);
+  schema.static('findByEmail', findByEmail)
 
-  return schema;
-
-};
+  return schema
+}

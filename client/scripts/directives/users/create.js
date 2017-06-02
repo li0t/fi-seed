@@ -1,43 +1,42 @@
 (function (window) {
-  'use strict';
+  'use strict'
 
-  var ng = window.angular;
+  var ng = window.angular
 
   /**
    * Users create directive function.
    */
-  function usersCreateDirectiveFn($http, $flash) {
+  function usersCreateDirectiveFn ($http, $flash) {
     /**
      * Users create directive link function.
      */
-    function usersCreateDirectiveLinkFn($scope) {
-
+    function usersCreateDirectiveLinkFn ($scope) {
       /* Submit success */
-      function onSubmitSuccess() {
-        $flash.success('USERS.CREATE.FLASHES.SUCCESS.TITLE', 'USERS.CREATE.FLASHES.SUCCESS.MESSAGE');
+      function onSubmitSuccess () {
+        $flash.success('USERS.CREATE.FLASHES.SUCCESS.TITLE', 'USERS.CREATE.FLASHES.SUCCESS.MESSAGE')
 
         if (ng.isFunction($scope.after)) {
-          $scope.after();
+          $scope.after()
         }
       }
 
       /* Submit error */
-      function onSubmitError() {
-        $flash.danger('USERS.CREATE.FLASHES.ERROR.TITLE', 'USERS.CREATE.FLASHES.ERROR.MESSAGE');
-        $scope.submitting = false;
+      function onSubmitError () {
+        $flash.danger('USERS.CREATE.FLASHES.ERROR.TITLE', 'USERS.CREATE.FLASHES.ERROR.MESSAGE')
+        $scope.submitting = false
       }
 
       /* Submit */
-      function submit() {
-        $scope.submitting = true;
+      function submit () {
+        $scope.submitting = true
 
         $http.post('/api/users')
-          .then(onSubmitSuccess, onSubmitError);
+          .then(onSubmitSuccess, onSubmitError)
       }
 
-      $scope.submitting = false;
+      $scope.submitting = false
 
-      $scope.submit = submit;
+      $scope.submit = submit
     }
 
     /* Users create directive definition */
@@ -48,9 +47,9 @@
         after: '=',
         data: '='
       }
-    };
+    }
 
-    return usersCreateDirectiveDef;
+    return usersCreateDirectiveDef
   }
 
   /**
@@ -60,6 +59,5 @@
     '$http', 'ngFlashes',
 
     usersCreateDirectiveFn
-  ]);
-
-}(window));
+  ])
+}(window))

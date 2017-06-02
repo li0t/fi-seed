@@ -1,8 +1,8 @@
-'use strict';
+'use strict'
 
-const mongoose = require('mongoose');
-const debug = require('debug');
-const path = require('path');
+const mongoose = require('mongoose')
+const debug = require('debug')
+const path = require('path')
 
 module.exports = {
 
@@ -14,4 +14,4 @@ module.exports = {
     mongoose
   ]
 
-};
+}

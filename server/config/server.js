@@ -1,12 +1,12 @@
-'use strict';
+'use strict'
 
-const path = require('path');
-const fs = require('fs');
+const path = require('path')
+const fs = require('fs')
 
-const CRED_DIR = path.join(__serverdir, 'credentials');
-const CERT = 'server-cert.pem';
-const KEY = 'server-key.pem';
-const CA = 'server-ca.pem';
+const CRED_DIR = path.join(__serverdir, 'credentials')
+const CERT = 'server-cert.pem'
+const KEY = 'server-key.pem'
+const CA = 'server-ca.pem'
 
 module.exports = {
 
@@ -20,4 +20,4 @@ module.exports = {
   /* Server ports */
   port: 3080
 
-};
+}

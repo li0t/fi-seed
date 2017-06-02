@@ -1,37 +1,37 @@
-'use strict';
+'use strict'
 
 // Include application globals
-require('../server/globals')(global);
+require('../server/globals')(global)
 
-global.__testdir = __dirname;
+global.__testdir = __dirname
 
-const CONSTS = require('fi-consts');
-const moment = require('moment');
-const path = require('path');
+const CONSTS = require('fi-consts')
+const moment = require('moment')
+const path = require('path')
 
-CONSTS.load(config('consts'));
+CONSTS.load(config('consts'))
 
-const PORT = config('server.js').port;
-const URL = 'http://localhost:';
-const DATABASE = 'liot.studio';
-const HOST = 'localhost';
+const PORT = config('server.js').port
+const URL = 'http://localhost:'
+const DATABASE = 'liot.studio'
+const HOST = 'localhost'
 
 const PATHS = {
   schemas: path.join(__serverdir, 'schemas'),
   tests: path.join(__testdir, 'files')
-};
+}
 
 const DATA = {
   tests: path.join(__testdir, 'data', 'tests.json'),
   mock: path.join(__testdir, 'data', 'mock')
-};
+}
 
-const TEST_DATE = moment();
+const TEST_DATE = moment()
 
 const MOCHA = {
   bail: true, // Stop tests on error
   timeout: 10000 // Max waittime for each test
-};
+}
 
 const TEST_NAME = [
   TEST_DATE.year(),
@@ -40,7 +40,7 @@ const TEST_NAME = [
   TEST_DATE.hours(),
   TEST_DATE.minutes(),
   TEST_DATE.seconds()
-].join('-');
+].join('-')
 
 const CONFIG = {
   TEST_DATE: TEST_DATE,
@@ -54,7 +54,6 @@ const CONFIG = {
   host: HOST,
   port: PORT,
   url: URL
-};
+}
 
-
-module.exports = CONFIG;
+module.exports = CONFIG

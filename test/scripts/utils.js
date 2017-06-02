@@ -1,340 +1,330 @@
-'use strict';
+'use strict'
 
-const rut = require('fi-rut');
-const walk = require('walk');
-const path = require('path');
-const is = require('fi-is');
-const fs = require('fs');
+const rut = require('fi-rut')
+const walk = require('walk')
+const path = require('path')
+const is = require('fi-is')
+const fs = require('fs')
 
-const Chance = require('chance');
-const chance = new Chance();
+const Chance = require('chance')
+const chance = new Chance()
 
 const WORD = {
   length: 8
-};
+}
 
 const SENTENCE = {
   words: 8
-};
+}
 
 const PARAGRAPH = {
   sentences: 8
-};
+}
 
 module.exports = (config) => {
-
   /**
    * Recicle data from a mock object
-   * 
-   * @param {any} mock 
-   * @param {any} many 
-   * @returns 
+   *
+   * @param {any} mock
+   * @param {any} many
+   * @returns
    */
-  function recicleMock(mock, many) {
+  function recicleMock (mock, many) {
     if (is.number(many) && many > 0) {
-      return createMultipleMocks(mock, many);
+      return createMultipleMocks(mock, many)
     }
 
-    var rec = {};
+    var rec = {}
 
     var REPLACER = {
       rut: randomRut(),
       email: randomAlpha() + '@mailinator.com',
       code: randomNumber()
-    };
-
-    for (var _v in mock) {
-      rec[_v] = REPLACER[_v] || mock[_v];
     }
 
-    return rec;
+    for (var _v in mock) {
+      rec[_v] = REPLACER[_v] || mock[_v]
+    }
+
+    return rec
   }
 
   /**
    * Perform a mock recicle several times
-   * 
-   * @param {any} mock 
-   * @param {any} arraySize 
-   * @returns 
+   *
+   * @param {any} mock
+   * @param {any} arraySize
+   * @returns
    */
-  function createMultipleMocks(mock, arraySize) {
-    var mocks = [];
+  function createMultipleMocks (mock, arraySize) {
+    var mocks = []
 
     for (let i = 0; i < arraySize; i++) {
-      mocks.push(recicleMock(mock));
+      mocks.push(recicleMock(mock))
     }
 
-    return mocks;
+    return mocks
   }
 
  /**
-  * Return a random person name. 
-  * 
-  * @param {any} gender 
-  * @param {any} middle 
-  * @returns 
+  * Return a random person name.
+  *
+  * @param {any} gender
+  * @param {any} middle
+  * @returns
   */
-  function randomName(gender, middle) {
-
+  function randomName (gender, middle) {
     return chance.name({
       gender: gender || 'male',
       middle: !middle
-    });
+    })
   }
 
   /**
    * Return a random city name.
-   * 
-   * @returns 
+   *
+   * @returns
    */
-  function randomCity() {
-    return chance.city();
+  function randomCity () {
+    return chance.city()
   }
 
   /**
    * Return a random word.
-   * 
-   * @param {any} length 
-   * @returns 
+   *
+   * @param {any} length
+   * @returns
    */
-  function randomAlpha(length) {
-    WORD.length = length || WORD.length;
-    return chance.word(WORD);
+  function randomAlpha (length) {
+    WORD.length = length || WORD.length
+    return chance.word(WORD)
   }
 
 /**
  * Return a random sentence
- * 
- * @param {any} words 
- * @returns 
+ *
+ * @param {any} words
+ * @returns
  */
-  function randomSentence(words) {
-    SENTENCE.words = words || WORD.words;
-    return chance.sentence(SENTENCE);
+  function randomSentence (words) {
+    SENTENCE.words = words || WORD.words
+    return chance.sentence(SENTENCE)
   }
 
   /**
-   *  Return a random paragraph 
-   * 
-   * @param {any} sentences 
-   * @returns 
+   *  Return a random paragraph
+   *
+   * @param {any} sentences
+   * @returns
    */
-  function randomParagraph(sentences) {
-    PARAGRAPH.sentences = sentences || WORD.sentences;
-    return chance.paragraph(PARAGRAPH);
+  function randomParagraph (sentences) {
+    PARAGRAPH.sentences = sentences || WORD.sentences
+    return chance.paragraph(PARAGRAPH)
   }
 
   /**
-   * 
-   * 
-   * @param {any} max 
-   * @param {any} min 
-   * @returns 
+   *
+   *
+   * @param {any} max
+   * @param {any} min
+   * @returns
    */
-  function randomNumber(max, min) {
+  function randomNumber (max, min) {
     // True / False Random
     if (max === 1 && min === 0) {
-      return Number(Math.random() >= 0.5);
+      return Number(Math.random() >= 0.5)
     }
 
-    max = max || 1000;
-    min = min || 1;
+    max = max || 1000
+    min = min || 1
 
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-
+    return Math.floor(Math.random() * (max - min + 1)) + min
   }
 
   /**
    * Generates a valid random rut
-   * 
-   * @returns 
+   *
+   * @returns
    */
-  function randomRut() {
-    var _rut = randomNumber(10000000, 1000000);
-    var ver = rut.calculate(_rut);
+  function randomRut () {
+    var _rut = randomNumber(10000000, 1000000)
+    var ver = rut.calculate(_rut)
 
-    _rut = String(_rut) + ver;
+    _rut = String(_rut) + ver
 
-    return _rut;
+    return _rut
   }
-  
+
   /**
    * Creates a new read stream of the file for each call and returns it
    * in formData format.
-   * 
-   * @param {any} file 
-   * @returns 
+   *
+   * @param {any} file
+   * @returns
    */
-  function formDataFile(file) {
-
+  function formDataFile (file) {
     var formData = {
       files: {
         value: fs.createReadStream(file.path),
         options: file.options
       }
-    };
+    }
 
-    return formData;
-
+    return formData
   }
- 
+
  /**
-  * Extracts CSRF token from a HTTP response. 
-  * 
-  * @param {any} res 
-  * @returns 
+  * Extracts CSRF token from a HTTP response.
+  *
+  * @param {any} res
+  * @returns
   */
-  function parseCSRF(res) {
-    let csrf;
+  function parseCSRF (res) {
+    let csrf
 
-    csrf = res.headers['set-cookie'][0].split(' ')[0];
-    csrf = csrf.substring(0, csrf.length - 1);
-    csrf = csrf.split('=')[1];
-    csrf = decodeURIComponent(csrf);
+    csrf = res.headers['set-cookie'][0].split(' ')[0]
+    csrf = csrf.substring(0, csrf.length - 1)
+    csrf = csrf.split('=')[1]
+    csrf = decodeURIComponent(csrf)
 
-    return csrf;
+    return csrf
   }
 
   /**
    * Connects to mongoose test database
-   * 
-   * @param {*} mongoose 
-   * @param {*} cb 
-   */  
-  function database(mongoose, cb) {
-    const db = mongoose.connect('mongodb://' + config.host + '/' + config.database).connection;
+   *
+   * @param {*} mongoose
+   * @param {*} cb
+   */
+  function database (mongoose, cb) {
+    const db = mongoose.connect('mongodb://' + config.host + '/' + config.database).connection
 
     db.once('open', () => {
-      cb();
-    });
+      cb()
+    })
 
     db.on('error', (err) => {
-      console.log(err);
-      process.exit(1);
-    });
+      console.log(err)
+      process.exit(1)
+    })
   }
 
    /**
-    * Creates a new Date object from every stringified date property in an object 
-    * 
-    * @param {any} _object 
-    * @returns 
+    * Creates a new Date object from every stringified date property in an object
+    *
+    * @param {any} _object
+    * @returns
     */
-  function formatDates(_object) {
-    var date = /\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z/;
-    var object = Object.assign({}, _object);
+  function formatDates (_object) {
+    var date = /\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z/
+    var object = Object.assign({}, _object)
 
     for (let variable in object) {
       if (object.hasOwnProperty(variable)) {
-        let prop = object[variable];
+        let prop = object[variable]
         if (typeof prop === 'string' && date.test(prop)) {
-          object[variable] = new Date(prop);
+          object[variable] = new Date(prop)
         }
       }
     }
 
-    return object;
+    return object
   }
 
    /**
     * Concatenate tests paths from a JSON object
-    * 
-    * @param {any} root 
-    * @param {any} tests 
-    * @returns 
+    *
+    * @param {any} root
+    * @param {any} tests
+    * @returns
     */
-  function expandTestsJSON(root, tests) {
-    var testFiles = [];
+  function expandTestsJSON (root, tests) {
+    var testFiles = []
 
     if (is.not.object(tests)) {
-
-      tests = (is.string(tests)) ? [tests] : tests;
+      tests = (is.string(tests)) ? [tests] : tests
 
       var files = tests.map((test) => {
-        return root.concat('/', test);
-      });
+        return root.concat('/', test)
+      })
 
-      return files;
+      return files
     }
 
     for (let test in tests) {
-      let slash = (is.empty(test)) ? '' : '/';
-      let path = root.concat(slash, test);
+      let slash = (is.empty(test)) ? '' : '/'
+      let path = root.concat(slash, test)
 
-      testFiles = testFiles.concat(expandTestsJSON(path, tests[test]));
+      testFiles = testFiles.concat(expandTestsJSON(path, tests[test]))
     }
 
-    return testFiles;
+    return testFiles
   }
 
   /**
    * Loads test files into mocha
-   * 
-   * @param {any} mocha 
+   *
+   * @param {any} mocha
    */
-  function loadTests(mocha) {
-    var tests = require(config.data.tests);
-    var testFiles = expandTestsJSON(config.paths.tests, tests);
+  function loadTests (mocha) {
+    var tests = require(config.data.tests)
+    var testFiles = expandTestsJSON(config.paths.tests, tests)
 
     testFiles.forEach((testFile) => {
-      mocha.addFile(testFile);
-    });
-
+      mocha.addFile(testFile)
+    })
   }
 
   /**
-   * Loads schema files into mongoose 
-   * 
-   * @param {any} mongoose 
+   * Loads schema files into mongoose
+   *
+   * @param {any} mongoose
    */
-  function loadSchemas(mongoose) {
-
+  function loadSchemas (mongoose) {
     walk.walkSync(config.paths.schemas, {
       listeners: {
         file: (root, stats) => {
-          var filename = stats.name.replace('.js', '');
-          var filepath = path.join(root, stats.name);
-          let schema = require(filepath).apply(this, [mongoose.Schema]);
+          var filename = stats.name.replace('.js', '')
+          var filepath = path.join(root, stats.name)
+          let schema = require(filepath).apply(this, [mongoose.Schema])
 
-          mongoose.model(filename, schema);
+          mongoose.model(filename, schema)
         },
         errors: (root, stats) => {
-          console.error(root, stats);
-          throw new Error('Could not load schema data!');
+          console.error(root, stats)
+          throw new Error('Could not load schema data!')
         }
       }
-    });
-
+    })
   }
 
   /**
-   * Loads test mock data from a js file 
-   * 
+   * Loads test mock data from a js file
+   *
    */
-  function loadMockData() {
-    var mock = {};
+  function loadMockData () {
+    var mock = {}
 
     walk.walkSync(config.data.mock, {
       listeners: {
         file: (root, stats) => {
-          var filename = stats.name.replace('.js', '');
-          var filepath = path.join(root, stats.name);
-          var file = require(filepath)(config, this);
+          var filename = stats.name.replace('.js', '')
+          var filepath = path.join(root, stats.name)
+          var file = require(filepath)(config, this)
 
-          mock[filename] = file;
-
+          mock[filename] = file
         },
         errors: (err, stats) => {
-          console.log(err, stats);
-          throw new Error('Could not load mock data!');
+          console.log(err, stats)
+          throw new Error('Could not load mock data!')
         }
       }
-    });
+    })
 
     /**
      * Make mock data globally available
      */
-    global.mock = mock;
+    global.mock = mock
   }
 
   return {
@@ -347,18 +337,18 @@ module.exports = (config) => {
     randomName,
     randomCity,
     randomRut,
-    
+
     // Test format utils
     formDataFile,
     recicleMock,
     formatDates,
     parseCSRF,
-    
+
     // Bootstraping functions
     loadMockData,
     loadSchemas,
     loadTests,
     database
 
-  };
-};
+  }
+}

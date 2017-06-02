@@ -1,9 +1,8 @@
-'use strict';
+'use strict'
 
-const PAGES_MAIN = 'pages/main';
+const PAGES_MAIN = 'pages/main'
 
 module.exports = (router) => {
-
   /**
    * Define all public routes here.
    */
@@ -18,19 +17,14 @@ module.exports = (router) => {
     '/users/sign-up', '/users/sign-in', '/users/sign-out'
 
   ], (req, res) => {
-
     /* Render the base layout */
     res.render(PAGES_MAIN, {
-      host: `${ req.protocol }://${ req.get('host') }`
-    });
-
-  });
+      host: `${req.protocol}://${req.get('host')}`
+    })
+  })
 
   /* Test error pages */
   router.get('/test/error', (req, res, next) => {
-
-    next(new Error('Test Error Message'));
-
-  });
-
-};
+    next(new Error('Test Error Message'))
+  })
+}
