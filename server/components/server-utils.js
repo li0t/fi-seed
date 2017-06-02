@@ -32,12 +32,10 @@ function onServerError (error) {
     case EACCES:
       console.error(ERR_EACCES, error.address, error.port)
       process.exit(1)
-      break
 
     case EADDRINUSE:
       console.error(ERR_EADDRINUSE, error.address, error.port)
       process.exit(1)
-      break
 
     default:
       throw error

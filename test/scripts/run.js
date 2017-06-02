@@ -34,6 +34,8 @@ utils.database(mongoose, () => {
 
   /* Retrieve CSRF Token and set it default */
   req('/', (err, res) => {
+    if (err) throw err
+
     req = req.defaults({
       headers: {
         'XSRF-TOKEN': utils.parseCSRF(res),
