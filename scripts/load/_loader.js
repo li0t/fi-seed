@@ -138,7 +138,7 @@ module.exports =  (itemsName) => {
   }
 
   /* Script initialization messages */
-  console.log('\n  Script de importación de items para FI-SEED\n'.replace('items', ITEMS_NAME).cyan.bold);
+  console.log('\n  Script de importación de items para liot.studio\n'.replace('items', ITEMS_NAME).cyan.bold);
 
   prompt.message = '  '.reset;
   prompt.delimiter = '';

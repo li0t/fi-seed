@@ -1,4 +1,4 @@
-# Fi-Seed Test Suite
+# liot.studio Test Suite
 This test suite is designed to test an application running a http or https server.
 
 ## Test directory structure

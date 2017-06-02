@@ -1,6 +1,6 @@
 'use strict';
 
-describe('FI-SEED API', () => {
+describe('LIOT-STUDIO API', () => {
   describe('[GET /api/health]', () => {
     it('should respond a 200 status code', (done) => {
       req('/api/health', (err, res) => {

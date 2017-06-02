@@ -1,20 +1,21 @@
 {
-  "name": "fi-seed",
-  "title": "Fi Seed",
-  "description": "A boilerplate for applications with Node.js + Express + MongoDB on the backend and AngularJS on the frontend (aka MEAN).",
+  "name": "liot.studio",
+  "title": "liot.studio",
+  "description": "My tender webpage",
   "color": "#b8dc3b",
-  "version": "3.3.0",
-  "stage": "stable",
+  "version": "0.0.1",
+  "stage": "development",
   "private": false,
   "license": "MIT",
-  "author": "Final Development Studio <sorcery@finaldevstudio.com> (http://finaldevstudio.com)",
+  "author": "Leonardo Ramos <leonardo0ramos@gmail.com> (http://liot.studio)",
   "contributors": [
     "Santiago G. Marín <santiago@finaldevstudio.com>",
-    "José Tomás Guzmán <jtguzman@finaldevstudio.com>"
+    "José Tomás Guzmán <jtguzman@finaldevstudio.com>",
+    "Leonardo Ramos <leonardo0ramos@gmail.com>"
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/finaldevstudio/fi-seed.git"
+    "url": "https://github.com/finaldevstudio/liot.studio.git"
   },
   "scripts": {
     "dev-cluster": "pm2 start pm2/cluster.json --env development",

@@ -1,7 +1,3 @@
-# Fi Seed
-A boilerplate for applications with Node.js + Express + MongoDB on the backend and AngularJS on the frontend (aka MEAN).
+# liot.studio
 
-## Using as base structure
-To create an application based on **Fi Seed** just fork this repository somewhere else.
-
-If you want, you can just [download the ZIP](https://github.com/FinalDevStudio/fi-seed/archive/master.zip) and extract it into your repository folder.
+### My tender webpage.

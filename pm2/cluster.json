@@ -1,6 +1,6 @@
 {
   "apps": [{
-    "name": "fi-seed",
+    "name": "liot.studio",
     "script": "server",
     "exec_mode": "cluster",
     "instances": 0,

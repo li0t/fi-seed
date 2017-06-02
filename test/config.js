@@ -13,7 +13,7 @@ CONSTS.load(config('consts'));
 
 const PORT = config('server.js').port;
 const URL = 'http://localhost:';
-const DATABASE = 'fi-seed';
+const DATABASE = 'liot.studio';
 const HOST = 'localhost';
 
 const PATHS = {

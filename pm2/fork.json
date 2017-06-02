@@ -1,6 +1,6 @@
 {
   "apps": [{
-    "name": "fi-seed",
+    "name": "liot.studio",
     "script": "server",
     "watch": [
       "package.json",

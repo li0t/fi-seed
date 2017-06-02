@@ -1,6 +1,6 @@
 'use strict';
 
-describe('FI-SEED', () => {
+describe('LIOT-STUDIO', () => {
   describe('[GET /]', () => {
     it('should respond a 200 status code and return application body', (done) => {
       req('/', (err, res, body) => {
